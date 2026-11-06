@@ -5,13 +5,13 @@ package snmp
 import "context"
 
 type Variable struct {
- OID string
- Type string
- Value string
+	OID   string
+	Type  string
+	Value string
 }
 
 type Client interface {
- Get(ctx context.Context, oids []string) ([]Variable, error)
- Walk(ctx context.Context, rootOID string, visit func(Variable) error) error
- Close() error
+	Get(ctx context.Context, oids []string) ([]Variable, error)
+	Walk(ctx context.Context, rootOID string, visit func(Variable) error) error
+	Close() error
 }
