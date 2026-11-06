@@ -22,6 +22,7 @@ For ARM64, replace `amd64` with `arm64`. These are development builds; verify ch
 ```sh
 git clone https://github.com/Abhesinh-chandpa/SNMP-Polling.git
 cd SNMP-Polling
+go mod tidy
 go build -o nmp-snmp ./cmd/nmp-snmp
 ./nmp-snmp version
 ```
