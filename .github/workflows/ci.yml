@@ -18,7 +18,7 @@ jobs:
       - name: Format check
         run: test -z "$(gofmt -l $(git ls-files '*.go'))"
       - name: Resolve module checksums
-        run: go mod download
+        run: go mod tidy
       - name: Verify dependencies
         run: go mod verify
       - name: Vet
