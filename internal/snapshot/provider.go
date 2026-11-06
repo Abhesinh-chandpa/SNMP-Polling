@@ -3,23 +3,23 @@
 package snapshot
 
 import (
- "context"
- "time"
+	"context"
+	"time"
 )
 
 type DeviceStatus struct {
- ID string
- Address string
- Reachable bool
- LastPoll time.Time
- LastError string
+	ID        string
+	Address   string
+	Reachable bool
+	LastPoll  time.Time
+	LastError string
 }
 
 type State struct {
- CapturedAt time.Time
- Devices []DeviceStatus
+	CapturedAt time.Time
+	Devices    []DeviceStatus
 }
 
 type Provider interface {
- Snapshot(ctx context.Context) (State, error)
+	Snapshot(ctx context.Context) (State, error)
 }
