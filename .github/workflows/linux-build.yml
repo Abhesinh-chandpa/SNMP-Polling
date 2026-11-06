@@ -1,0 +1,35 @@
+name: Linux binary builds
+on:
+  push:
+    branches: [main, "batch/**"]
+  pull_request:
+    branches: [main, "batch/**"]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  binaries:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        arch: [amd64, arm64]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: false
+      - run: go mod tidy
+      - name: Build Linux binary
+        env:
+          GOOS: linux
+          GOARCH: ${{ matrix.arch }}
+          CGO_ENABLED: "0"
+        run: |
+          mkdir -p dist
+          go build -trimpath -ldflags="-s -w" -o "dist/nmp-snmp-linux-${GOARCH}" ./cmd/nmp-snmp
+          cd dist && sha256sum * > SHA256SUMS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nmp-snmp-linux-${{ matrix.arch }}
+          path: dist/
