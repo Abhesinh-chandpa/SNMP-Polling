@@ -1,0 +1,15 @@
+# Example only. Do not commit live credentials.
+collector:
+  id: snmp-lab-01
+  poll_interval: 30s
+  max_concurrent_devices: 10
+  timeout: 2s
+  retries: 1
+
+# Device registry and secret references are introduced in Batch 2.
+devices: []
+dashboard:
+  enabled: true
+  refresh_interval: 1s
+  transport: unix
+  socket_path: /run/nmp-snmp/monitor.sock
