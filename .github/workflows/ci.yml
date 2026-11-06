@@ -19,6 +19,8 @@ jobs:
         run: test -z "$(gofmt -l $(git ls-files '*.go'))"
       - name: Resolve module checksums
         run: go mod tidy
+      - name: Print module checksums for lockfile review
+        run: cat go.sum
       - name: Verify dependencies
         run: go mod verify
       - name: Vet
